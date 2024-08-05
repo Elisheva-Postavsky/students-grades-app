@@ -1,52 +1,54 @@
-<div>
+<div class="multiselect-container">
+<div class="multiselect">
     <label for="studentIds">Select Student IDs:</label>
     <select id="studentIds" (change)="onStudentIdSelected($event)">
-      <option *ngFor="let student of students" [value]="student.ID">{{ student.ID }}</option>
+      <option *ngFor="let student of students" [value]="student.id">{{ student.id }}</option>
     </select>
-</div>
-<div>
-    <p>Selected Student IDs:</p>
-    <ul>
-      <li *ngFor="let id of selectedStudentIds">{{ id }}</li>
-    </ul>
+    <div>
+      <p>Selected Student IDs:</p>
+      <div style="min-height: 50px;">
+        <span class="space" *ngFor="let id of selectedStudentIds">{{ id }}</span>
+      </div>
+  </div>
 </div>
 
-<div>
+
+<div class="multiselect">
     <label for="studentSubjects">Select Student Subjects:</label>
     <select id="studentSubjects" (change)="onSubjectSelected($event)">
       <option *ngFor="let student of students" [value]="student.subject">{{ student.subject }}</option>
     </select>
-</div>
-<div>
-    <p>Selected Student Subjects:</p>
-    <ul>
-      <li *ngFor="let subject of selectedSubjects">{{ subject }}</li>
-    </ul>
-</div>
-
-
-  
-<div>
-    <h2>Table 1: Grades Average Over Time</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Student ID</th>
-          <th>Grades</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let student of studentsGradesOverTime">
-          <tr>
-            <td>{{ student.id }}</td>
-            <td>{{ student.grades.join(', ') }}</td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
+    <div >
+      <p>Selected Student Subjects:</p>
+      <div style="min-height: 50px;">
+        <span class="space" *ngFor="let subject of selectedSubjects">{{ subject }}</span>
+      </div>
   </div>
+</div>
+</div>
+
+<div class="table-container">
+<div>
+  <h2>Table 1: Grades Average Over Time</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Grades</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let student of studentsGradesOverTime">
+        <tr>
+          <td>{{ student.id }}</td>
+          <td>{{ student.grades }}</td>
+        </tr>
+      </ng-container>
+    </tbody> 
+  </table>
+</div>
   
-  <div>
+  <div >
     <h2>Table 2: Students Averages</h2>
     <table>
       <thead>
@@ -66,7 +68,7 @@
     </table>
   </div>
   
-  <div>
+  <div >
     <h2>Table 3: Grades Averages Per Subject</h2>
     <table>
       <thead>
@@ -85,3 +87,11 @@
       </tbody>
     </table>
   </div>
+</div>
+  <!-- <div cdkDropList (cdkDropListDropped)="onDropTable($event)">
+    <div *ngFor="let table of tables" cdkDrag>{{ table }}</div>
+  </div>
+  <div *ngIf="hiddenChartVisible" cdkDropList (cdkDropListDropped)="onDropHiddenChart($event)">
+    <div cdkDrag>Hidden Chart Button</div>
+  </div> -->
+  

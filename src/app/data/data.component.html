@@ -1,6 +1,7 @@
 
 <input (input)="filterData($event)" placeholder="Filter data">
-<table>
+<table  class="custom-table"
+>
     <tr>
       <th>ID</th>
       <th>Name</th>
@@ -14,9 +15,9 @@
       <th>Subject</th>
     </tr>
     <tr *ngFor="let student of filteredStudents" (click)="showStudentDetails(student)" style="cursor: pointer;    height: 40px;">
-      <td>{{student.ID}}</td>
-      <td>{{student.Name}}</td>
-      <td>{{student.Grade}}</td>
+      <td>{{student.id}}</td>
+      <td>{{student.name}}</td>
+      <td>{{student.grade}}</td>
       <td>{{student.email}}</td>
       <td>{{student.dateJoined}}</td>
       <td>{{student.address}}</td>
@@ -26,8 +27,8 @@
       <td>{{student.subject}}</td>
     </tr>
 </table>
-<button (click)="addNewStudent()">Add</button>
-<button (click)="removeSelectedStudent()" [disabled]="!selectedStudent">Remove</button>
+<button class='button' (click)="addNewStudent()">Add</button>
+<button class='button'(click)="removeSelectedStudent()" [disabled]="!selectedStudent">Remove</button>
 <app-student-details [selectedStudent]="selectedStudent" 
                      [editMode]="editMode" 
                      [editedStudent]="editedStudent" 

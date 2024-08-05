@@ -17,6 +17,10 @@ export class StudentDetailsComponent implements OnChanges{
   @Output() saveStudent = new EventEmitter<Student>();
   @Output() editStudent = new EventEmitter<Student>();
 
+  constructor(private dataService: DataService){
+
+  }
+
 
   onSave() {
     if (this.editedStudent) {
@@ -33,5 +37,9 @@ export class StudentDetailsComponent implements OnChanges{
       const newStudent = changes['selectedStudent'].currentValue;
       this.editedStudent = newStudent;
     }
+  }
+
+  isEditStudent(){
+    return this.dataService.getIsEditStudent()
   }
 }

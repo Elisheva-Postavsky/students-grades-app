@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, Student } from '../data-service.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-analysis',
@@ -11,10 +13,12 @@ export class AnalysisComponent implements OnInit {
   selectedStudentIds: number[] = [];
   selectedSubjects: string[] = [];
 
-  // Initialize the data for the three tables
   studentsGradesOverTime: { id: number, grades: number[] }[] = [];
   studentsAverages: { id: number, average: number }[] = [];
   subjectsAverages: { subject: string, average: number }[] = [];
+
+  tables = [this.studentsGradesOverTime, this.studentsAverages, this.subjectsAverages];
+  hiddenChartVisible: boolean = false;
 
   constructor(private dataService: DataService) {}
 
@@ -38,23 +42,43 @@ export class AnalysisComponent implements OnInit {
       this.calculateData();
     }
   }
+  // onDropTable(event: CdkDragDrop<any[]>): void {
+  //   moveItemInArray(this.tables, event.previousIndex, event.currentIndex);
+  // }
 
-  // Method to calculate data for the three tables
+  // onDropHiddenChart(event: CdkDragDrop<any[]>): void {
+  //   if (event.currentIndex < this.tables.length) {
+  //     moveItemInArray(this.tables, this.tables.findIndex(t => t.name === 'Hidden Chart Button'), event.currentIndex);
+  //   }
+  // }
+
   calculateData(): void {
     console.log('Calculating data...');
     
     // Table 1: Grades average over time
-    this.studentsGradesOverTime = this.selectedStudentIds.map(id => {
-      const student = this.dataService.getStudentById(id);
-      return { id, grades: [student?.Grade || 0] };
+    const studentsGradesOverTime: { id: number, grades: number[] }[] = [];
+
+    this.selectedStudentIds.forEach(id => {
+    const students = this.dataService.getAllStudents().filter(student => student.id === id);
+
+    students.forEach(student => {
+    studentsGradesOverTime.push({ id: student.id, grades: [student.grade] });
     });
-    console.log('Students Grades Over Time:', this.studentsGradesOverTime);
-    
+    });
+    console.log('Students Grades Over Time:', studentsGradesOverTime);
+
     // Table 2: Students averages
-    this.studentsAverages = this.selectedStudentIds.map(id => {
-      const student = this.dataService.getStudentById(id);
-      const gradesSum = student ? student.Grade : 0;
-      return { id, average: gradesSum / this.selectedStudentIds.length };
+    const studentsGrades: { [id: number]: number[] } = {};
+    this.selectedStudentIds.forEach(id => {
+      studentsGrades[id] = this.dataService.getAllStudents()
+        .filter(student => student.id === id)
+        .map(student => student.grade);
+    });
+
+    this.studentsAverages = Object.keys(studentsGrades).map(id => {
+    const grades = studentsGrades[parseInt(id)];
+    const average = grades.reduce((sum, grade) => sum + grade, 0) / grades.length;
+    return { id: parseInt(id), average };
     });
     console.log('Students Averages:', this.studentsAverages);
     
@@ -63,7 +87,7 @@ export class AnalysisComponent implements OnInit {
     this.selectedSubjects.forEach(subject => {
       subjectsGrades[subject] = this.students
         .filter(student => student.subject === subject)
-        .map(student => student.Grade);
+        .map(student => student.grade);
     });
     
     this.subjectsAverages = Object.keys(subjectsGrades).map(subject => {
@@ -72,5 +96,14 @@ export class AnalysisComponent implements OnInit {
       return { subject, average };
     });
     console.log('Subjects Averages:', this.subjectsAverages);
+
+    // Add the hidden chart button entry
+    // if (!this.hiddenChartVisible) {
+    //   this.tables.push({ name: 'Hidden Chart Button', data: [] });
+    //   this.hiddenChartVisible = true;
+    // }
   }
+
+  
 }
+

@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "students-grades-app:build:production"
+              "buildTarget": "students-grades-app:build:production"
             },
             "development": {
-              "browserTarget": "students-grades-app:build:development"
+              "buildTarget": "students-grades-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "students-grades-app:build"
+            "buildTarget": "students-grades-app:build"
           }
         },
         "test": {

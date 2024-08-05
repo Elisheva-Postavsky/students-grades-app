@@ -1,0 +1,76 @@
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .custom-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .custom-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .custom-table tr:hover {
+    background-color: #ddd;
+  }
+
+  
+.button-container {
+    text-align: center; 
+    margin-top: 50px; 
+  }
+  
+  .button {
+    background-color: #00bcd4; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 20px;
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.3s; 
+  }
+  
+  .button:hover {
+    background-color: #0097a7;
+    transform: scale(1.05); 
+  }
+  
+  .button:active {
+    background-color: #00838f;
+  }
+
+  
+.button-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .button {
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 5px; 
+  }
+  
+  .button:hover {
+    background-color: #0097a7;
+    transform: scale(1.05);
+  }
+  
+  .button:active {
+    background-color: #00838f;
+  }

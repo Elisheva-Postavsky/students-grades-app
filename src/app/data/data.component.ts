@@ -10,11 +10,12 @@ import { FilterService } from '../filter.service';
 export class DataComponent implements OnInit {
   students: Student[];
   filteredStudents: Student[];
-  selectedStudent!: Student;
+  selectedStudent: Student | null = null;
   editMode = false;
   addMode = false;
   editedStudent: Student | null = null;
   addedStudent: Student | null = null;
+  isEdit = false;
 
   constructor(private dataService: DataService, private filterService: FilterService) {
     this.students = this.dataService.getAllStudents();
@@ -40,7 +41,7 @@ export class DataComponent implements OnInit {
     const filters = inputElement.split(':').map(s => s.trim());
     const column = filters[0];
     const searchTerms = filters[1].split(/\s+/).map(s => s.trim());
-
+    console.log(column, searchTerms)
     const filterCriteria = `${column}:${searchTerms.join(' ')}`;
     localStorage.setItem('filterCriteria', filterCriteria);
     this.filterDataWithCriteria(filterCriteria);
@@ -59,17 +60,17 @@ export class DataComponent implements OnInit {
   }
 
   showStudentDetails(student: Student) {
+    this.dataService.setIsEditStudent(true);
     this.selectedStudent = student;
   }
 
-  
-
   addNewStudent() {
+    this.dataService.setIsEditStudent(false);
     this.addedStudent = {
-      ID: 0,
-      Name: '',
+      id: 0,
+      name: '',
       email: '',
-      Grade: 0,
+      grade: 0,
       dateJoined: new Date(),
       address: '',
       city: '',
@@ -83,27 +84,34 @@ export class DataComponent implements OnInit {
   saveNewStudent() {
     if (this.addedStudent) {
       this.dataService.addStudent(this.addedStudent);
-      this.students.push(this.addedStudent);
       this.addMode = false;
       this.addedStudent = null;
     }
   }
 
   removeSelectedStudent(): void {
-    // Implement removing a selected student logic
+    if (this.selectedStudent) {
+      this.students = this.students.filter(student => student.id !== this.selectedStudent!.id);
+  
+      this.dataService.removeStudent(this.selectedStudent.id);
+  
+      this.selectedStudent = null;
+      this.editMode = false;
+    }
   }
-  editStudentDetails
-  (student: Student) {
+  editStudentDetails (student: Student) {
+    this.dataService.setIsEditStudent(true);
     this.editMode = true;
-    this.editedStudent = { ...student }; // Create a deep copy of the selected student
+    this.editedStudent = { ...student }; 
+    this.editedStudent = null;
+
   }
   
   saveEditedStudent() {
     if (this.editedStudent) {
-      const index = this.students.findIndex(student => student.ID === this.editedStudent!.ID);
+      const index = this.students.findIndex(student => student.id === this.editedStudent!.id);
       if (index !== -1) {
-        // this.students[index] = { ...this.editedStudent };
-        this.dataService.updateStudent(this.editedStudent); // Save the edited student details
+        this.dataService.updateStudent(this.editedStudent); 
       }
   
       this.editMode = false;
