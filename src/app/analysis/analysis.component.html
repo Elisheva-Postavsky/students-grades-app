@@ -1,0 +1,87 @@
+<div>
+    <label for="studentIds">Select Student IDs:</label>
+    <select id="studentIds" (change)="onStudentIdSelected($event)">
+      <option *ngFor="let student of students" [value]="student.ID">{{ student.ID }}</option>
+    </select>
+</div>
+<div>
+    <p>Selected Student IDs:</p>
+    <ul>
+      <li *ngFor="let id of selectedStudentIds">{{ id }}</li>
+    </ul>
+</div>
+
+<div>
+    <label for="studentSubjects">Select Student Subjects:</label>
+    <select id="studentSubjects" (change)="onSubjectSelected($event)">
+      <option *ngFor="let student of students" [value]="student.subject">{{ student.subject }}</option>
+    </select>
+</div>
+<div>
+    <p>Selected Student Subjects:</p>
+    <ul>
+      <li *ngFor="let subject of selectedSubjects">{{ subject }}</li>
+    </ul>
+</div>
+
+
+  
+<div>
+    <h2>Table 1: Grades Average Over Time</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Grades</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let student of studentsGradesOverTime">
+          <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.grades.join(', ') }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  
+  <div>
+    <h2>Table 2: Students Averages</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Average Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let student of studentsAverages">
+          <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.average }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  
+  <div>
+    <h2>Table 3: Grades Averages Per Subject</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Average Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let subject of subjectsAverages">
+          <tr>
+            <td>{{ subject.subject }}</td>
+            <td>{{ subject.average }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>

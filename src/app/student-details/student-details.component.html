@@ -1,0 +1,59 @@
+
+    <ng-container *ngIf="editedStudent">
+        <h2>Student Details</h2> 
+        <form (ngSubmit)="onSave()"> 
+          <label for="ID">ID:</label> 
+          <input type="text" id="ID" name="ID" [(ngModel)]="editedStudent.ID" required>
+          <label for="name">Name:</label> 
+          <input type="text" id="name" name="name" [(ngModel)]="editedStudent.Name" required>
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" [(ngModel)]="editedStudent.email" required> 
+          <label for="grade">Grade:</label> 
+          <input type="text" id="grade" name="grade" [(ngModel)]="editedStudent.Grade" required>
+          <label for="dateJoined">dateJoined:</label> 
+          <input type="text" id="dateJoined" name="dateJoined" [(ngModel)]="editedStudent.dateJoined" required>
+          <label for="address">address:</label> 
+          <input type="text" id="address" name="address" [(ngModel)]="editedStudent.address" required>
+          <label for="city">city:</label> 
+          <input type="text" id="city" name="city" [(ngModel)]="editedStudent.city" required>
+          <label for="country">country:</label> 
+          <input type="text" id="country" name="country" [(ngModel)]="editedStudent.country" required>
+          <label for="zip">zip:</label> 
+          <input type="text" id="zip" name="zip" [(ngModel)]="editedStudent.zip" required>
+          <label for="subject">subject:</label> 
+          <input type="text" id="subject" name="subject" [(ngModel)]="editedStudent.subject" required>
+         
+          <button type="submit">Save</button> 
+        </form> 
+    </ng-container>
+    
+    <ng-container *ngIf="addedStudent">
+      <h2>Student Details</h2> 
+      <form (ngSubmit)="onSave()"> 
+        <label for="name">Name:</label> 
+        <input type="text" id="name" name="name" [(ngModel)]="addedStudent.Name" required>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" [(ngModel)]="addedStudent.email" required> 
+        <label for="grade">Grade:</label> 
+        <input type="text" id="grade" name="grade" [(ngModel)]="addedStudent.Grade" required>
+        <label for="dateJoined">dateJoined:</label> 
+        <input type="text" id="dateJoined" name="dateJoined" [(ngModel)]="addedStudent.dateJoined" required>
+        <label for="address">address:</label> 
+        <input type="text" id="address" name="address" [(ngModel)]="addedStudent.address" required>
+        <label for="city">city:</label> 
+        <input type="text" id="city" name="city" [(ngModel)]="addedStudent.city" required>
+        <label for="country">country:</label> 
+        <input type="text" id="country" name="country" [(ngModel)]="addedStudent.country" required>
+        <label for="zip">zip:</label> 
+        <input type="text" id="zip" name="zip" [(ngModel)]="addedStudent.zip" required>
+        <label for="subject">subject:</label> 
+        <input type="text" id="subject" name="subject" [(ngModel)]="addedStudent.subject" required>
+       
+        <button type="submit">Save</button> 
+      </form> 
+  </ng-container>
+
+
+
+
+
